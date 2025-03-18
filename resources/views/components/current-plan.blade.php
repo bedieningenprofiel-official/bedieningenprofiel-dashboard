@@ -1,4 +1,4 @@
-<div class="bg-secondary-full dark:bg-primary-full border dark:border-primary-light w-full md:w-2/3 rounded-lg p-4">
+<div class="bg-secondary-full dark:bg-primary-full border dark:border-primary-light w-full md:w-2/3 rounded-lg p-2">
     <h1 class="font-medium text-2xl dark:text-primary-shadWhite mb-1">
         {{ __('settings/index.headers.current_plan.header') }}
     </h1>
