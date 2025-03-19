@@ -13,6 +13,7 @@
 .env.testing
 .phpactor.json
 .phpunit.result.cache
+composer.phar
 Homestead.json
 Homestead.yaml
 auth.json
