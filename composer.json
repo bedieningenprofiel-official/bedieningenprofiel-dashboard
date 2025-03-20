@@ -15,6 +15,7 @@
         "davidhsianturi/blade-bootstrap-icons": "^1.5",
         "filament/notifications": "^3.2",
         "hashids/hashids": "^5.0",
+        "icehouse-ventures/laravel-chartjs": "^4.2",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
         "league/flysystem-aws-s3-v3": "^3.0",

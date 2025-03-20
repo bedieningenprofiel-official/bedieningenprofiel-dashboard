@@ -2,7 +2,7 @@
     <div class="p-4 flex justify-between items-center w-full">
         <div class="flex items-center space-x-4">
             <a href="{{ route('dashboard') }}">
-                <span class="inline-flex items-center text-sm italic font-semibold">
+                <span class="inline-flex items-center text-sm">
                     <x-lucide-church class="ml-4 w-5 h-5 mr-1" />
                     {{ __('navigation/topbar.header') }}
                 </span>
@@ -174,18 +174,91 @@
             class="fixed top-0 right-0 h-full w-full bg-white border-l border-gray-300 shadow-lg focus:outline-none z-50"
             style="display: none;" role="profile_menu" aria-orientation="vertical" aria-labelledby="profile-menu">
             <div class="h-full flex flex-col">
-                <div class="px-4 py-6">
+                <div class="px-4 py-6 inline-flex items-center">
                     <button @click="open = false" class="focus:outline-none">
                         <x-lucide-square-x class="w-6 h-6" />
                     </button>
+
+                    <div x-data="{
+                        open: false,
+                        toggle() {
+                            this.open ? this.close() : this.open = true;
+                        },
+                        close(focusAfter) {
+                            if (!this.open) return;
+                            this.open = false;
+                            focusAfter && focusAfter.focus();
+                        }
+                    }" x-on:keydown.escape.prevent.stop="close($refs.button)"
+                        x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+                        x-id="['current_team_dropdown_mob']">
+                        <div x-ref="panel" x-show="open" x-transition.origin.top.left
+                            x-on:click.outside="close($refs.button)" :id="$id('current_team_dropdown_mob')" x-cloak>
+                            <button x-ref="button" x-on:click="toggle()" :aria-expanded="open"
+                                :aria-controls="$id('current_team_dropdown_mob_button')" type="button"
+                                class="relative flex items-center whitespace-nowrap justify-center gap-2 py-2 rounded-lg shadow-sm bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 hover:border-gray-200 px-4">
+                                @if (auth()->user()->currentTeam)
+                                    <span class="text-sm">
+                                        {{ auth()->user()->currentTeam->name }}
+                                    </span>
+                                @else
+                                    <span class="text-sm">
+                                        {{ __('navigation/topbar.no_team_found') }}
+                                    </span>
+                                @endif
+                                <x-lucide-layout-dashboard class="w-3 h-3" />
+                            </button>
+
+                            <div class="p-1" role="none">
+                                @can('view_any_attached_team')
+                                    @if ($userTeams->count() > 0)
+                                        @foreach ($userTeams as $userTeam)
+                                            <form action="{{ route('teams.switch', $userTeam) }}" method="POST">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="inline-flex items-center justify-between rounded-md hover:bg-gray-200 w-full px-3 py-1"
+                                                    role="menuitem">
+                                                    <span class="text-sm font-medium">{{ $userTeam->name }}</span>
+                                                    @if (auth()->user()->current_team_id == $userTeam->id)
+                                                        <x-lucide-circle-check class="w-4 h-4 text-emerald-500" />
+                                                    @endif
+                                                </button>
+                                            </form>
+                                        @endforeach
+                                    @else
+                                        <span class="text-sm px-3 py-1">{{ __('navigation/topbar.no_team_found') }}</span>
+                                    @endif
+                                @endcan
+
+                                <hr class="mt-1 mb-2" />
+
+                                @can('create_teams')
+                                    <a href="{{ route('teams.create') }}"
+                                        class="inline-flex items-center rounded-md hover:bg-gray-200 w-full px-2 py-1">
+                                        <x-lucide-circle-plus class="w-4 h-4 mr-1" />
+                                        <span
+                                            class="text-sm font-medium">{{ __('navigation/topbar.links.new_team') }}</span>
+                                    </a>
+                                @else
+                                    <a href=""
+                                        class="inline-flex items-center rounded-md bg-emerald-500 hover:bg-emerald-700 w-full px-2 py-1 text-white">
+                                        <x-lucide-book-plus class="w-4 h-4 mr-1" />
+                                        <span class="text-sm">{{ __('navigation/topbar.links.upgrade_plan') }}</span>
+                                    </a>
+                                @endcan
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="p-4 space-y-4">
-                    <x-mobile-nav-tab href="{{ route('dashboard') }}" icon='lucide-layout-dashboard'
+                    <x-mobile-nav-tab href="{{ route('dashboard') }}" icon="lucide-layout-dashboard"
                         active="{{ request()->routeIs('dashboard') }}">
                         {{ __('navigation/topbar.tabs.dashboard') }}
                     </x-mobile-nav-tab>
+
                     @can('view_current_team')
-                        <x-mobile-nav-tab href="{{ route('teams.show', $currentTeam) }}" icon='lucide-users'
+                        <x-mobile-nav-tab href="{{ route('teams.show', $currentTeam) }}" icon="lucide-users"
                             active="{{ request()->routeIs('teams.show', $currentTeam) }}">
                             {{ __('navigation/topbar.tabs.teams') }}
                         </x-mobile-nav-tab>
@@ -203,13 +276,16 @@
                                     <span class="text-sm">
                                         {{ auth()->user()->name }} ({{ auth()->user()->username }})
                                     </span>
-                                    <span class="text-gray-400 text-xs">{{ auth()->user()->email }}</span>
+                                    <span class="text-gray-400 text-xs">
+                                        {{ auth()->user()->email }}
+                                    </span>
                                 </div>
                             </div>
                             <x-lucide-separator-horizontal class="w-5 h-5" />
                         </div>
                     </div>
 
+                    <!-- Profile Dropdown Menu -->
                     <div x-show="open" @click.away="open = false"
                         x-transition:enter="transition ease-out duration-100"
                         x-transition:enter-start="transform opacity-0 scale-95"
@@ -224,14 +300,15 @@
                                 icon="lucide-user-cog">
                                 {{ __('navigation/topbar.user_dropdown.links.user_settings') }}
                             </x-topbar-dropdown-tab>
+
                             <form action="{{ route('logout') }}" method="POST" class="w-full">
                                 @csrf
-
                                 <button type="submit"
                                     class="inline-flex items-center px-2 py-1.5 w-full rounded-md hover:bg-red-300">
                                     <x-lucide-log-out class="w-4 h-4 mr-2" />
-                                    <span
-                                        class="text-sm">{{ __('navigation/topbar.user_dropdown.links.logout') }}</span>
+                                    <span class="text-sm">
+                                        {{ __('navigation/topbar.user_dropdown.links.logout') }}
+                                    </span>
                                 </button>
                             </form>
                         </div>

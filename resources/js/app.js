@@ -1,32 +1,5 @@
 import "./bootstrap";
 import "flowbite";
-import {
-    createIcons,
-    Users,
-    Building2,
-    Mail,
-    Phone,
-    Pencil,
-    User,
-    Braces,
-    Clock9,
-    Plus,
-} from "lucide";
-
-createIcons({
-    icons: {
-        User,
-        Users,
-        Building2,
-        Braces,
-        Mail,
-        Phone,
-        Pencil,
-        Clock9,
-        Plus,
-    },
-});
-
 let currentTheme = null;
 
 function getInitialTheme() {
@@ -34,6 +7,7 @@ function getInitialTheme() {
     if (savedTheme) {
         return savedTheme;
     }
+
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         return "dark";
     }
