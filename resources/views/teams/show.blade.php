@@ -32,7 +32,7 @@
                     @can('add_team_member', $currentTeam)
                         <x-button type="button" class="flex items-center text-xs rounded-md">
                             <a href="" class="inline-flex items-center">
-                                <i data-lucide="plus" class="mr-1 w-4 h-4 dark:text-primary-full"></i>
+                                <x-lucide-plus class="mr-1 w-4 h-4" />
                                 {{ __('teams/show.table.users_add') }}
                             </a>
                         </x-button>
@@ -45,25 +45,25 @@
                             <tr class="border-b border-gray-200">
                                 <th class="text-left text-sm font-medium text-gray-500 dark:text-primary-shadWhite p-2">
                                     <span class="inline-flex items-center">
-                                        <i data-lucide="user" class="mr-1 w-6 h-6"></i>
+                                        <x-lucide-user class="mr-1 w-5 h-5" />
                                         {{ __('teams/show.table.users_name') }}
                                     </span>
                                 </th>
                                 <th class="text-left text-sm font-medium text-gray-500 dark:text-primary-shadWhite p-2">
                                     <span class="inline-flex items-center">
-                                        <i data-lucide="braces" class="mr-1 w-6 h-6"></i>
+                                        <x-lucide-braces class="mr-1 w-5 h-5" />
                                         {{ __('teams/show.table.users_role') }}
                                     </span>
                                 </th>
                                 <th class="text-left text-sm font-medium text-gray-500 dark:text-primary-shadWhite p-2">
                                     <span class="inline-flex items-center">
-                                        <i data-lucide="mail" class="mr-1 w-6 h-6"></i>
+                                        <x-lucide-mail class="mr-1 w-5 h-5" />
                                         {{ __('teams/show.table.users_email') }}
                                     </span>
                                 </th>
                                 <th class="text-left text-sm font-medium text-gray-500 dark:text-primary-shadWhite p-2">
                                     <span class="inline-flex items-center">
-                                        <i data-lucide="clock9" class="mr-1 w-6 h-6"></i>
+                                        <x-lucide-clock-9 class="mr-1 w-5 h-5" />
                                         {{ __('teams/show.table.users_joined_at') }}
                                     </span>
                                 </th>
