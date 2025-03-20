@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChurchController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TeamsController;
@@ -18,6 +19,11 @@ Route::post('/panel/register', [AuthController::class, 'createAccount'])->name('
 Route::middleware(['auth', 'web'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::prefix('churches')->group(function () {
+            Route::get('/create', [ChurchController::class, 'show'])->name('churches.create');
+            Route::post('/create', [ChurchController::class, 'store'])->name('churches.store');
+        });
 
         Route::prefix('settings')->group(function () {
             Route::get('/{user}', [SettingsController::class, 'index'])->name('settings');

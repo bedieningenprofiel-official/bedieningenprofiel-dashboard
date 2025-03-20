@@ -17,6 +17,7 @@ return [
     ],
 
     'links' => [
+        'create_church' => 'Creëer een kerk',
         'new_team' => 'Nieuwe team...',
         'upgrade_plan' => 'Upgrade plan',
     ],

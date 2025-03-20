@@ -18,11 +18,9 @@ class TeamFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'description' => $this->faker->sentence,
-            'state' => $this->faker->state,
-            'email' => $this->faker->email,
-            'phone' => $this->faker->phoneNumber,
+            'description' => $this->faker->text(50),
             'user_id' => 1,
+            'church_id' => 1,
         ];
     }
 }

@@ -41,12 +41,12 @@ return [
         ],
 
         'teams' => [
-            'salt' => 'IybWX4QQCAM68Gw5ZiGxVvW7jYMh2HpV7EQdLfDs/5M=',
+            'salt' => env('HASHIDS_TEAM_SALT', 'IybWX4QQCAM68Gw5ZiGxVvW7jYMh2HpV7EQdLfDs/5M='),
             'length' => 12,
         ],
 
         'users' => [
-            'salt' => 'VegmkORzAFBGWEkmk/Pxf8P7Kh8bg2Tix9iDbP5kOYk=',
+            'salt' => env('HASHIDS_USERS_SALT', 'VegmkORzAFBGWEkmk/Pxf8P7Kh8bg2Tix9iDbP5kOYk='),
             'length' => 12,
         ],
 

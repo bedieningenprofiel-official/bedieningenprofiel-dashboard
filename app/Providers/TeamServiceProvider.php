@@ -26,6 +26,7 @@ class TeamServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        Gate::define('create_church', fn (User $user) => $user->canCreateChurch());
         Gate::define('create_teams', fn (User $user) => $user->canCreateTeams());
         Gate::define('view_current_team', fn (User $user) => $user->currentTeam()->exists());
         Gate::define('view_any_attached_team', fn (User $user) => $user->teams()->count() >= 0);
@@ -38,10 +39,8 @@ class TeamServiceProvider extends ServiceProvider
 
         View::composer('layouts.navigation', function ($view) {
             $user = auth()->user();
-            $user->load('teams');
 
             $view->with([
-                'userTeams' => $user->teams,
                 'currentTeam' => $user->teams->find($user->current_team_id),
             ]);
         });

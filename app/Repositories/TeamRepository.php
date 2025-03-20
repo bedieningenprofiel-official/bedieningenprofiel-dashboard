@@ -19,6 +19,8 @@ class TeamRepository
     public function createTeam(
         array $data
     ): Team|RedirectResponse {
+        $data['church_id'] = auth()->user()->church->id;
+
         if ($this->teamExists($data['name'])) {
             Notification::make()
                 ->title(__('notification.teams.team_already_exists'))

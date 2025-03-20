@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Church;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,8 +20,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('current_team_id')->nullable();
-            $table->boolean('is_guest')->default(true);
-            $table->string('avatar')->nullable();
+            $table->foreignIdFor(Church::class, 'church_id')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

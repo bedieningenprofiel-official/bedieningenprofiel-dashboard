@@ -16,6 +16,11 @@ class Team extends Model
 
     use IsHashed;
 
+    public function church(): BelongsTo
+    {
+        return $this->belongsTo(Church::class);
+    }
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
