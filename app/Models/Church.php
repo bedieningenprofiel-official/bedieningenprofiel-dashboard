@@ -12,6 +12,7 @@ class Church extends Model
 {
     /** @use HasFactory<\Database\Factories\ChurchFactory> */
     use HasFactory;
+
     use SoftDeletes;
 
     public function teams(): HasMany

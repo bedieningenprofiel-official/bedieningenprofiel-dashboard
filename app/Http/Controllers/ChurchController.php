@@ -52,7 +52,7 @@ class ChurchController extends Controller
         ]);
 
         auth()->user()->update([
-            'church_id' => $church->id
+            'church_id' => $church->id,
         ]);
 
         return $this;

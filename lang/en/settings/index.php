@@ -53,6 +53,6 @@ return [
         'disband_church' => [
             'header' => 'Church',
             'subheader' => 'Various church settings',
-        ]
+        ],
     ],
 ];
