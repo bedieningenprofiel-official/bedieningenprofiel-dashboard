@@ -5,7 +5,7 @@
                 <div class="flex justify-between items-center">
                     <div class="flex flex-col">
                         <h1 class="inline-flex items-center text-lg font-medium dark:text-primary-shadWhite">
-                            <i data-lucide="users" class="mr-2 w-5 h-5"></i>
+                            <x-lucide-users class="w-5 h-5 mr-2" />
                             {{ $currentTeam->name }}
                         </h1>
                         <span class="text-xs text-gray-500">{{ $currentTeam->description }}</span>
@@ -14,28 +14,9 @@
                     @can('edit_team', $currentTeam)
                         <a href="#"
                             class="p-2 text-primary-full hover:text-primary-light dark:text-secondary-full dark:hover:text-primary-light">
-                            <i data-lucide="pencil" class="w-5 h-5"></i>
+                            <x-lucide-pencil class="w-5 h-5" />
                         </a>
                     @endcan
-                </div>
-
-                <div class="flex flex-col mt-4 space-y-2">
-                    <span
-                        class="inline-flex items-center text-sm @if (!$currentTeam->state) text-gray-400 @endif">
-                        <i data-lucide="building2"
-                            class="mr-2 w-5 h-5 text-primary-full dark:text-primary-shadWhite"></i>
-                        {{ $currentTeam->state ?? 'N/A' }}
-                    </span>
-                    <span
-                        class="inline-flex items-center text-sm @if (!$currentTeam->email) text-gray-400 @endif">
-                        <i data-lucide="mail" class="mr-2 w-5 h-5 text-primary-full dark:text-primary-shadWhite"></i>
-                        {{ $currentTeam->email ?? 'N/A' }}
-                    </span>
-                    <span
-                        class="inline-flex items-center text-sm @if (!$currentTeam->phone) text-gray-400 @endif">
-                        <i data-lucide="phone" class="mr-2 w-5 h-5 text-primary-full dark:text-primary-shadWhite"></i>
-                        {{ $currentTeam->phone ?? 'N/A' }}
-                    </span>
                 </div>
             </div>
 
