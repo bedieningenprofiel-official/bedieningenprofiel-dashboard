@@ -62,4 +62,13 @@ class TeamsController extends Controller
 
         return redirect()->route('dashboard');
     }
+
+    public function showAllTeams(): View
+    {
+        $allTeams = $this->teamRepository->getAllTeams();
+
+        return view('teams.show-all', [
+            'allTeams' => $allTeams
+        ]);
+    }
 }

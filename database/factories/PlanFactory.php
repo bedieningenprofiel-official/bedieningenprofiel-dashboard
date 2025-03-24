@@ -53,4 +53,14 @@ class PlanFactory extends Factory
             'max_users_per_team' => 30,
         ]);
     }
+
+    public function admin(): Factory
+    {
+        return $this->state([
+            'name' => 'admin_state',
+            'price' => 9999,
+            'max_teams' => 999,
+            'max_users_per_team' => 999,
+        ]);
+    }
 }

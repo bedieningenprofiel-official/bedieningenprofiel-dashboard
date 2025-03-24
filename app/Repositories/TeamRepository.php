@@ -6,6 +6,8 @@ use App\Models\Role;
 use App\Models\Team;
 use Filament\Notifications\Notification;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class TeamRepository
 {
@@ -56,6 +58,13 @@ class TeamRepository
         string $teamName
     ): bool {
         return Team::where('name', $teamName)->exists();
+    }
+
+    public function getAllTeams(): Collection
+    {
+        $teamWithMembers = Team::with('members')->get();
+
+        return collect($teamWithMembers);
     }
 
     protected function getRole(

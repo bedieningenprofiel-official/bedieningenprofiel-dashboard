@@ -14,6 +14,11 @@ return [
     'tabs' => [
         'dashboard' => 'Dashboard',
         'teams' => 'Teams',
+
+        'is_admin' => [
+            'all_teams' => 'All Teams',
+            'surveys' => 'Surveys',
+        ],
     ],
 
     'links' => [

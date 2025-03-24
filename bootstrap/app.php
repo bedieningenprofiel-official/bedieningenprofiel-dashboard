@@ -26,6 +26,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'App\Http\Middleware\CanCreateTeamsMiddleware',
             'App\Http\Middleware\TeamUserLimit',
         ]);
+        $middleware->group('church', [
+            'App\Http\Middleware\CanCreateChurchMiddleware',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Locale;
 use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -31,8 +32,9 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'is_admin' => false,
             'current_team_id' => null,
-            /* 'church_id' => null, */
+            'church_id' => null,
             'remember_token' => Str::random(10),
         ];
     }
@@ -64,6 +66,8 @@ class UserFactory extends Factory
                 },
                 'status' => 'active',
             ]);
+
+            $this->initLocalization($user);
         });
     }
 
@@ -79,6 +83,8 @@ class UserFactory extends Factory
                 'ends_at' => now()->addYears(10),
                 'status' => 'active',
             ]);
+
+            $this->initLocalization($user);
         });
     }
 
@@ -94,6 +100,8 @@ class UserFactory extends Factory
                 'ends_at' => now()->addDays(30),
                 'status' => 'active',
             ]);
+
+            $this->initLocalization($user);
         });
     }
 
@@ -109,6 +117,41 @@ class UserFactory extends Factory
                 'ends_at' => now()->addDays(30),
                 'status' => 'active',
             ]);
+
+            $this->initLocalization($user);
         });
+    }
+
+    public function withAdminStatus(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->subscriptions()->create([
+                'plan_id' => Plan::where('name', 'admin_state')->first()->id,
+                'starts_at' => now(),
+                'ends_at' => now()->addDays(3650),
+                'status' => 'active',
+            ]);
+
+            $this->initLocalization($user);
+        });
+    }
+
+    protected function initLocalization(User $user): User
+    {
+        $user->localizations()->createMany(
+            collect(Locale::cases())->map(function (Locale $locale) {
+                return [
+                    'language' => $locale->name,
+                    'locale' => $locale->value,
+                    'selected' => false,
+                ];
+            })->toArray()
+        );
+
+        $user->localizations()
+            ->where('locale', Locale::English->value)
+        ->update(['selected' => true]);
+
+        return $user;
     }
 }

@@ -21,8 +21,8 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::prefix('churches')->group(function () {
-            Route::get('/create', [ChurchController::class, 'show'])->name('churches.create');
-            Route::post('/create', [ChurchController::class, 'store'])->name('churches.store');
+            Route::get('/create', [ChurchController::class, 'show'])->name('churches.create')->middleware('church');
+            Route::post('/create', [ChurchController::class, 'store'])->name('churches.store')->middleware('church');
         });
 
         Route::prefix('settings')->group(function () {
@@ -30,6 +30,10 @@ Route::middleware(['auth', 'web'])->group(function () {
         });
 
         Route::prefix('teams')->group(function () {
+            Route::get('/all', [TeamsController::class, 'showAllTeams'])
+                ->middleware('can:see_all_if_admin')
+                ->name('teams.show-all');
+
             Route::get('/create', [TeamsController::class, 'create'])->name('teams.create')->middleware('teams');
             Route::post('/create', [TeamsController::class, 'store'])->name('teams.store')->middleware('teams');
 

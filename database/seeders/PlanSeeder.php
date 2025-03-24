@@ -12,5 +12,6 @@ class PlanSeeder extends Seeder
         Plan::factory()->free()->create();
         Plan::factory()->pro()->create();
         Plan::factory()->proPlus()->create();
+        Plan::factory()->admin()->create();
     }
 }

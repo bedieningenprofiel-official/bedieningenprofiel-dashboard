@@ -32,6 +32,7 @@ return [
             'free' => 'Free',
             'pro' => 'Pro',
             'pro_plus' => 'Pro+',
+            'admin_state' => 'Super Admin',
 
             'team_limit' => 'Teams: :current_amount / :plan_limit',
             'team_limit_exceeded' => 'You have exceeded the team limit for your current plan',
