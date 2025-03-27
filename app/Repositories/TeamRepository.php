@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
 class TeamRepository
 {
     private const string TEAMLEADER = 'teamleader';
+
     private readonly array $permissions;
 
     public function __construct()

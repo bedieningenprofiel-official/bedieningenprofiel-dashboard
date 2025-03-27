@@ -68,7 +68,7 @@ class TeamsController extends Controller
         $allTeams = $this->teamRepository->getAllTeams();
 
         return view('teams.show-all', [
-            'allTeams' => $allTeams
+            'allTeams' => $allTeams,
         ]);
     }
 }

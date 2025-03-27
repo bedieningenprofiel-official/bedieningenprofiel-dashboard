@@ -18,7 +18,7 @@ class SurveyResponseFactory extends Factory
     {
         return [
             'survey_id' => 1,
-            'personality_scores' => []
+            'personality_scores' => [],
         ];
     }
 }

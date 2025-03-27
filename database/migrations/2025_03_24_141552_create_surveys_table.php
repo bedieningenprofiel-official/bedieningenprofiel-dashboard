@@ -24,14 +24,14 @@ return new class extends Migration
 
         Schema::table('surveys', function (Blueprint $table) {
             $table->foreign('team_id')
-                  ->references('id')
-                  ->on('teams')
-                  ->nullOnDelete();
+                ->references('id')
+                ->on('teams')
+                ->nullOnDelete();
 
             $table->foreign('parent_survey_id')
-                  ->references('id')
-                  ->on('surveys')
-                  ->nullOnDelete();
+                ->references('id')
+                ->on('surveys')
+                ->nullOnDelete();
         });
 
         Schema::create('personality_types', function (Blueprint $table) {

@@ -5,9 +5,7 @@ namespace Database\Seeders;
 use App\Models\Surveys\PersonalityType;
 use App\Models\Surveys\Survey;
 use App\Models\Surveys\SurveyQuestion;
-use App\Models\Team;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SurveySeeder extends Seeder
@@ -24,8 +22,8 @@ class SurveySeeder extends Seeder
         $createdTypes = [];
         foreach ($this->personalityTypes as $type) {
             $createdTypes[$type['name']] = PersonalityType::firstOrCreate(
-                    ['name' => $type['name']],
-                    ['description' => $type['description']]
+                ['name' => $type['name']],
+                ['description' => $type['description']]
             );
         }
 
@@ -44,13 +42,13 @@ class SurveySeeder extends Seeder
                 'left_statement' => 'Ik ben goed in het motiveren van mensen.',
                 'right_statement' => 'Ik onderwijs graag uit de Bijbel.',
                 'left_personality' => 'Evangelist',
-                'right_personality' => 'Teacher'
+                'right_personality' => 'Teacher',
             ],
             [
                 'left_statement' => 'Ik zie vaak hoe dingen in de toekomst zullen ontwikkelen.',
                 'right_statement' => 'Ik vind het belangrijk om voor mensen te zorgen.',
                 'left_personality' => 'Prophet',
-                'right_personality' => 'Pastor'
+                'right_personality' => 'Pastor',
             ],
         ];
 
@@ -61,7 +59,7 @@ class SurveySeeder extends Seeder
                 'right_statement' => $question['right_statement'],
                 'left_personality_id' => $createdTypes[$question['left_personality']]->id,
                 'right_personality_id' => $createdTypes[$question['right_personality']]->id,
-                'order' => $index + 1
+                'order' => $index + 1,
             ]);
         }
     }

@@ -20,7 +20,7 @@ class SurveyAnswerFactory extends Factory
             'survey_response_id' => 1,
             'survey_question_id' => 1,
             'selected_option' => 'yes',
-            'numeric_value' => rand(1, 1000)
+            'numeric_value' => rand(1, 1000),
         ];
     }
 }

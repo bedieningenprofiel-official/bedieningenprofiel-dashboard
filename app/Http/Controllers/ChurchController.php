@@ -12,8 +12,7 @@ class ChurchController extends Controller
 {
     public function __construct(
         protected ChurchRepository $churchRepository
-    ) {
-    }
+    ) {}
 
     public function show(): View
     {

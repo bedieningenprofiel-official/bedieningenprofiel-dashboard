@@ -25,5 +25,5 @@ return [
 
     'churches' => [
         'created' => 'Kerk is aangemaakt',
-    ]
+    ],
 ];

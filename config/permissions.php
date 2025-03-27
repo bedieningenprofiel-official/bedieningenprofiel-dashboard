@@ -10,5 +10,5 @@ return [
         'add_team_member' => fn (User $user, Team $team) => $user->isOwnerOfTeam($team) && $user->canAddMembers(),
         'add_notes' => fn (User $user, Team $team) => $user->isOwnerOfTeam($team) && $user->canAddMembers(),
     ],
-    'member' => []
+    'member' => [],
 ];

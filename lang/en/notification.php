@@ -25,5 +25,5 @@ return [
 
     'churches' => [
         'created' => 'Church has been created',
-    ]
+    ],
 ];

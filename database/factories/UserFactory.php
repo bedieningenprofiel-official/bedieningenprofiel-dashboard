@@ -150,7 +150,7 @@ class UserFactory extends Factory
 
         $user->localizations()
             ->where('locale', Locale::English->value)
-        ->update(['selected' => true]);
+            ->update(['selected' => true]);
 
         return $user;
     }
