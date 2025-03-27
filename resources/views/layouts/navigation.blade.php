@@ -1,4 +1,4 @@
-<nav class="hidden md:block sticky bg-secondary-full bg-white">
+<nav class="hidden md:block sticky bg-secondary-full bg-white z-50">
     <div class="p-4 flex justify-between items-center w-full">
         <div class="flex items-center space-x-4">
             <a href="{{ route('dashboard') }}">
@@ -183,7 +183,8 @@
                     active="{{ request()->routeIs('teams.show-all') }}">
                     {{ __('navigation/topbar.tabs.is_admin.all_teams') }}
                 </x-topbar-navigation-tab>
-                <x-topbar-navigation-tab href="#">
+                <x-topbar-navigation-tab href="{{ route('surveys.index') }}"
+                    active="{{ request()->routeIs('surveys.index') }}">
                     {{ __('navigation/topbar.tabs.is_admin.surveys') }}
                 </x-topbar-navigation-tab>
             @endcan

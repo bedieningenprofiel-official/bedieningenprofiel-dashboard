@@ -6,11 +6,11 @@ use App\Models\Role;
 use App\Models\Team;
 use Filament\Notifications\Notification;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class TeamRepository
 {
+    private const string TEAMLEADER = 'teamleader';
     private readonly array $permissions;
 
     public function __construct()
@@ -21,9 +21,10 @@ class TeamRepository
     public function createTeam(
         array $data
     ): Team|RedirectResponse {
-        $data['church_id'] = auth()->user()->church->id;
+        $data['church_id'] = auth()->user()->church_id;
+        $data['user_id'] = auth()->user()->id;
 
-        if ($this->teamExists($data['name'])) {
+        if (Team::where('name', $data['name'])->exists()) {
             Notification::make()
                 ->title(__('notification.teams.team_already_exists'))
                 ->duration(2500)
@@ -33,17 +34,18 @@ class TeamRepository
             return redirect()->route('teams.create');
         }
 
-        $team = auth()->user()->ownedTeams()->create($data);
+        $church = auth()->user()->church;
+        $createdTeam = $church->teams()->create($data);
 
-        $this->teamPermissions($team, $this->permissions);
+        $this->teamPermissions($createdTeam, $this->permissions);
 
-        $team->members()->attach(auth()->user(), [
-            'role_id' => $this->getRole('teamleader')->id,
+        $createdTeam->members()->attach(auth()->user(), [
+            'role_id' => Role::where('name', self::TEAMLEADER)->value('id'),
         ]);
 
-        auth()->user()->update(['current_team_id' => $team->id]);
+        auth()->user()->update(['current_team_id' => $createdTeam->id]);
 
-        return $team;
+        return $createdTeam;
     }
 
     public function switchTeamId(
@@ -54,12 +56,6 @@ class TeamRepository
         auth()->user()->refresh();
     }
 
-    public function teamExists(
-        string $teamName
-    ): bool {
-        return Team::where('name', $teamName)->exists();
-    }
-
     public function getAllTeams(): Collection
     {
         $teamWithMembers = Team::with('members')->get();
@@ -67,13 +63,7 @@ class TeamRepository
         return collect($teamWithMembers);
     }
 
-    protected function getRole(
-        string $roleName
-    ): Role {
-        return Role::where('name', $roleName)->first();
-    }
-
-    protected function teamPermissions(Team $team, array $permissions): void
+    public function teamPermissions(Team $team, array $permissions): void
     {
         foreach ($permissions as $role => $permissions) {
             $team->roles()->create([

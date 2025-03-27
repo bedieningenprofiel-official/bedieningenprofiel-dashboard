@@ -9,10 +9,6 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory(5)->withRandomPlan()->create();
-        User::factory(5)->withProPlan()->create();
-        User::factory(3)->withProPlusPlan()->create();
-
         User::factory()->withAdminStatus()->create([
             'name' => 'Super Admin',
             'username' => 'Bedieningenprofiel',

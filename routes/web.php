@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChurchController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SurveysController;
 use App\Http\Controllers\TeamsController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
@@ -39,6 +40,10 @@ Route::middleware(['auth', 'web'])->group(function () {
 
             Route::post('/team-switch/{team}', [TeamsController::class, 'switchTeam'])->name('teams.switch');
             Route::get('/{currentTeam}', [TeamsController::class, 'show'])->name('teams.show');
+        });
+
+        Route::prefix('/surveys')->group(function () {
+            Route::get('/', [SurveysController::class, 'index'])->name('surveys.index');
         });
     });
 

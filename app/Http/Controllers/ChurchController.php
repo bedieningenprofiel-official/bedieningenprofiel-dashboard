@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateChurchRequest;
+use App\Repositories\ChurchRepository;
 use Filament\Notifications\Notification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ChurchController extends Controller
 {
+    public function __construct(
+        protected ChurchRepository $churchRepository
+    ) {
+    }
+
     public function show(): View
     {
         return view('churches.create');
@@ -28,33 +34,18 @@ class ChurchController extends Controller
             return redirect()->route('churches.create');
         }
 
-        $this->createChurch(
+        $this->churchRepository->createChurch(
             $validated['church_name'],
             $validated['church_email'],
             $validated['church_address'],
         );
 
         Notification::make()
-            ->title('Church has been created.')
+            ->title(__('notification.churches.created'))
             ->success()
             ->duration(2500)
             ->send();
 
         return redirect()->route('dashboard');
-    }
-
-    protected function createChurch(string $name, string $email, string $address): self
-    {
-        $church = auth()->user()->ownedChurch()->create([
-            'church_name' => $name,
-            'church_email' => $email,
-            'church_address' => $address,
-        ]);
-
-        auth()->user()->update([
-            'church_id' => $church->id,
-        ]);
-
-        return $this;
     }
 }

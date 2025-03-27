@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             PlanSeeder::class,
             UserSeeder::class,
             LocalesSeeder::class,
+            TeamSeeder::class,
+            SurveySeeder::class,
         ]);
     }
 }

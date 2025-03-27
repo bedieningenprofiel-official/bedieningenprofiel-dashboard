@@ -27,7 +27,7 @@ class TeamsController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $team = $this->teamRepository->createTeam($request->only('name', 'description'));
+        $this->teamRepository->createTeam($request->only('name', 'description'));
 
         Notification::make()
             ->title(__('notification.teams.team_created'))

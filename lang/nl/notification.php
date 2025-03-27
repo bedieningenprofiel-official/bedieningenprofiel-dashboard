@@ -22,4 +22,8 @@ return [
     'plan' => [
         'upgrade' => 'Upgrade uw plan alstublieft',
     ],
+
+    'churches' => [
+        'created' => 'Kerk is aangemaakt',
+    ]
 ];
