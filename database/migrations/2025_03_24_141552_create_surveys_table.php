@@ -64,8 +64,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('survey_response_id')->constrained()->onDelete('cascade');
             $table->foreignId('survey_question_id')->constrained()->onDelete('cascade');
-            $table->string('selected_option');
-            $table->integer('numeric_value');
+            $table->enum('selected_option', ['left', 'right', 'neutral']);
+            $table->tinyInteger('numeric_value');
             $table->timestamps();
         });
     }

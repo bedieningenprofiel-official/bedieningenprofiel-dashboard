@@ -13,4 +13,11 @@ class SurveysController extends Controller
             'surveys' => Survey::all(),
         ]);
     }
+
+    public function show(Survey $survey): View
+    {
+        return view('surveys.show', [
+            'survey' => $survey,
+        ]);
+    }
 }

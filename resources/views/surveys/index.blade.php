@@ -4,12 +4,15 @@
             <div class="flex-grow">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     @foreach ($surveys as $survey)
-                        <div
-                            class="flex flex-col items-start @if ($survey->status === 'active') border-green-400 border-2 @else border-gray-200 border @endif rounded-lg py-2 px-4">
-                            <span class="text-sm">{{ $survey->name }}</span>
-                            <span
-                                class="text-xs italic text-green-400">{{ __('surveys/statuses.' . $survey->status) }}</span>
-                        </div>
+                        <a href="{{ route('surveys.show', $survey) }}"
+                            class="inline-flex items-center @if ($survey->status === 'active') border-green-400 border-2 @else border-gray-200 border @endif rounded-lg py-2 px-4 w-full">
+                            <div class="flex flex-col items-start">
+                                <span class="text-sm">{{ $survey->name }}</span>
+                                <span class="text-xs italic text-green-400">
+                                    {{ __('surveys/statuses.' . $survey->status) }}
+                                </span>
+                            </div>
+                        </a>
                     @endforeach
                 </div>
             </div>

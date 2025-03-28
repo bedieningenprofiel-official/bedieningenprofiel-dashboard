@@ -44,6 +44,7 @@ Route::middleware(['auth', 'web'])->group(function () {
 
         Route::prefix('/surveys')->group(function () {
             Route::get('/', [SurveysController::class, 'index'])->name('surveys.index');
+            Route::get('/{survey}', [SurveysController::class, 'show'])->name('surveys.show');
         });
     });
 
