@@ -50,6 +50,11 @@ return [
             'length' => 12,
         ],
 
+        'surveys' => [
+            'salt' => env('HASHIDS_USERS_SALT', '7E3yRdy8fx6X8MgZ9Q8Y0PIhGxRpwCbf1Ft3xXBE3tk='),
+            'length' => 12,
+        ],
+
     ],
 
 ];

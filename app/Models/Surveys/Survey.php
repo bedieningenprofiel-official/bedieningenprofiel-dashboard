@@ -3,6 +3,7 @@
 namespace App\Models\Surveys;
 
 use App\Models\Team;
+use App\Traits\IsHashed;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +14,7 @@ class Survey extends Model
 {
     /** @use hasfactory<\database\factories\surveyfactory> */
     use HasFactory;
+    use IsHashed;
 
     public function team(): BelongsTo
     {
@@ -58,5 +60,11 @@ class Survey extends Model
 
             return $surveyCopy;
         });
+    }
+
+    public function getRouteKey(): string
+    {
+        return $this->connectedSalt('surveys')
+            ->getRouteKeyForModel();
     }
 }

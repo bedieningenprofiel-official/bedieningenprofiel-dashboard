@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('surveys', function (Blueprint $table) {
             $table->id();
             $table->string('name')->default('Vijfvoudige bedieningen test');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->string('status')->default('inactive');
             $table->foreignId('team_id')->nullable();
             $table->unsignedBigInteger('parent_survey_id')->nullable();

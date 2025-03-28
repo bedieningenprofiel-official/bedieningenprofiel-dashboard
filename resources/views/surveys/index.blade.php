@@ -19,7 +19,7 @@
 
             <div class="flex flex-col">
                 <div class="w-full md:w-64">
-                    <a href="#"
+                    <a href="{{ route('surveys.create') }}"
                         class="inline-flex items-center border border-gray-200 rounded-lg px-4 py-1.5 w-full">
                         <x-lucide-plus class="w-5 h-5 mr-1" />
                         <span class="text-sm">{{ __('surveys/index.buttons.create') }}</span>
