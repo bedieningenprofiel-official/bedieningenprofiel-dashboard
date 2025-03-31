@@ -26,4 +26,9 @@ return [
     'churches' => [
         'created' => 'Kerk is aangemaakt',
     ],
+
+    'surveys' => [
+        'created' => 'Enquête is succesvol aangemaakt',
+        'already_exists' => 'Een enquête met deze naam bestaat al',
+    ],
 ];

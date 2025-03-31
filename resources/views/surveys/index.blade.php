@@ -8,7 +8,7 @@
                             class="inline-flex items-center @if ($survey->status === 'active') border-green-400 border-2 @else border-gray-200 border @endif rounded-lg py-2 px-4 w-full">
                             <div class="flex flex-col items-start">
                                 <span class="text-sm">{{ $survey->name }}</span>
-                                <span class="text-xs italic text-green-400">
+                                <span class="text-xs italic @if ($survey->status === 'active') text-green-400 @endif">
                                     {{ __('surveys/statuses.' . $survey->status) }}
                                 </span>
                             </div>

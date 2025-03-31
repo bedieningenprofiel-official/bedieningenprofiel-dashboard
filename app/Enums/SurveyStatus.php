@@ -2,14 +2,20 @@
 
 namespace App\Enums;
 
-enum SurveyStatus: string
+use Filament\Support\Contracts\HasLabel;
+
+enum SurveyStatus: string implements HasLabel
 {
     case Inactive = 'inactive';
     case Active = 'active';
     case Archived = 'archived';
 
-    public function translation(): string
+    public function getLabel(): string
     {
-        return __("surveys.statuses.{$this->value}");
+        return match ($this) {
+            self::Inactive => __('surveys/statuses.inactive'),
+            self::Active => __('surveys/statuses.active'),
+            self::Archived => __('surveys/statuses.archived')
+        };
     }
 }

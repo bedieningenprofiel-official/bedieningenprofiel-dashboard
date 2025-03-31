@@ -16,3 +16,23 @@
 [x-cloak] {
     display: none !important;
 }
+
+.fi-in-tabs {
+    @apply rounded-md;
+}
+
+.fi-tabs-item {
+    @apply rounded-md hover:bg-slate-800;
+}
+
+.fi-tabs-item-active {
+    @apply text-white bg-slate-800;
+}
+
+.fi-tabs-item:hover .fi-tabs-item-label {
+    @apply text-white;
+}
+
+.fi-tabs-item-active .fi-tabs-item-label {
+    @apply text-white;
+}

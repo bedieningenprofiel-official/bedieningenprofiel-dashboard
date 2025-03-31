@@ -26,4 +26,9 @@ return [
     'churches' => [
         'created' => 'Church has been created',
     ],
+
+    'surveys' => [
+        'created' => 'Survey has been created successfully',
+        'already_exists' => 'Survey with this name already exists',
+    ],
 ];

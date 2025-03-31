@@ -33,9 +33,4 @@ class SurveysController extends Controller
     {
         return view('surveys.create');
     }
-
-    public function store(CreateSurveyRequest $request): RedirectResponse
-    {
-        $validated = $request->validated();
-    }
 }
