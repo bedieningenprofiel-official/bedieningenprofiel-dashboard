@@ -60,3 +60,23 @@ document.addEventListener("DOMContentLoaded", () => {
         applyTheme(selectedTheme, true);
     });
 });
+
+FilePond.registerPlugin(FilePondPluginFileValidateType);
+const inputElement = document.querySelector('input[type="file"].filepond');
+const csrfToken = document
+    .querySelector('meta[name="csrf-token"]')
+    .getAttribute("content");
+
+FilePond.create(inputElement, {
+    acceptedFileTypes: [
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.ms-excel",
+    ],
+}).setOptions({
+    server: {
+        process: "/dashboard/upload",
+        headers: {
+            "X-CSRF-TOKEN": csrfToken,
+        },
+    },
+});

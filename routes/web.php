@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SurveysController;
 use App\Http\Controllers\TeamsController;
+use App\Services\UploadFileMechanic;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 
@@ -47,7 +48,10 @@ Route::middleware(['auth', 'web'])->group(function () {
             Route::get('/create', [SurveysController::class, 'create'])->name('surveys.create');
 
             Route::get('/{survey}', [SurveysController::class, 'show'])->name('surveys.show');
+            Route::post('/{survey}/excel', [SurveysController::class, 'handleExcel'])->name('surveys.upload.excel');
         });
+
+        Route::post('/upload', [UploadFileMechanic::class, 'store'])->name('dashboard.upload');
     });
 
     Route::post('/panel/logout', [AuthController::class, 'logout'])->name('logout');

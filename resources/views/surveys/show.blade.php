@@ -21,6 +21,11 @@
                         <span id="is-template"
                             class="text-xs mt-1">{{ ucfirst($survey->is_template ? 'Yes' : 'No') }}</span>
                     </div>
+                    <div class="flex flex-col items-start">
+                        <label for="contains-excel" class="text-sm">Contains excel questions</label>
+                        <span id="contains-excel"
+                            class="text-xs mt-1">{{ ucfirst($survey->excel_file ? 'Yes' : 'No') }}</span>
+                    </div>
                 </div>
             </div>
             <livewire:create-questions :survey="$survey" />

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('team_id')->nullable();
             $table->unsignedBigInteger('parent_survey_id')->nullable();
             $table->boolean('is_template')->default(false);
+            $table->string('excel_file')->nullable();
             $table->timestamps();
         });
 
@@ -49,6 +50,7 @@ return new class extends Migration
             $table->foreignId('left_personality_id')->nullable()->constrained('personality_types');
             $table->foreignId('right_personality_id')->nullable()->constrained('personality_types');
             $table->integer('order')->default(0);
+            $table->boolean('imported_through_excel')->default(false);
             $table->timestamps();
         });
 

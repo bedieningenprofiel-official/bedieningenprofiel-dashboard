@@ -37,30 +37,30 @@ class SurveySeeder extends Seeder
             'is_template' => true,
         ]);
 
-        $questions = [
-            [
-                'left_statement' => 'Ik ben goed in het motiveren van mensen.',
-                'right_statement' => 'Ik onderwijs graag uit de Bijbel.',
-                'left_personality' => 'Evangelist',
-                'right_personality' => 'Teacher',
-            ],
-            [
-                'left_statement' => 'Ik zie vaak hoe dingen in de toekomst zullen ontwikkelen.',
-                'right_statement' => 'Ik vind het belangrijk om voor mensen te zorgen.',
-                'left_personality' => 'Prophet',
-                'right_personality' => 'Pastor',
-            ],
-        ];
-
-        foreach ($questions as $index => $question) {
-            SurveyQuestion::create([
-                'survey_id' => $survey->id,
-                'left_statement' => $question['left_statement'],
-                'right_statement' => $question['right_statement'],
-                'left_personality_id' => $createdTypes[$question['left_personality']]->id,
-                'right_personality_id' => $createdTypes[$question['right_personality']]->id,
-                'order' => $index + 1,
-            ]);
-        }
+        /*$questions = [*/
+        /*    [*/
+        /*        'left_statement' => 'Ik ben goed in het motiveren van mensen.',*/
+        /*        'right_statement' => 'Ik onderwijs graag uit de Bijbel.',*/
+        /*        'left_personality' => 'Evangelist',*/
+        /*        'right_personality' => 'Leraar',*/
+        /*    ],*/
+        /*    [*/
+        /*        'left_statement' => 'Ik zie vaak hoe dingen in de toekomst zullen ontwikkelen.',*/
+        /*        'right_statement' => 'Ik vind het belangrijk om voor mensen te zorgen.',*/
+        /*        'left_personality' => 'Profeet',*/
+        /*        'right_personality' => 'Herder',*/
+        /*    ],*/
+        /*];*/
+        /**/
+        /*foreach ($questions as $index => $question) {*/
+        /*    SurveyQuestion::create([*/
+        /*        'survey_id' => $survey->id,*/
+        /*        'left_statement' => $question['left_statement'],*/
+        /*        'right_statement' => $question['right_statement'],*/
+        /*        'left_personality_id' => $createdTypes[$question['left_personality']]->id,*/
+        /*        'right_personality_id' => $createdTypes[$question['right_personality']]->id,*/
+        /*        'order' => $index + 1,*/
+        /*    ]);*/
+        /*}*/
     }
 }

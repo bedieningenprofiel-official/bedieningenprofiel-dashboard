@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Survey extends Model
+class Survey extends Model implements HasMedia
 {
     /** @use hasfactory<\database\factories\surveyfactory> */
     use HasFactory;
     use IsHashed;
+    use InteractsWithMedia;
 
     public function team(): BelongsTo
     {
@@ -39,6 +42,12 @@ class Survey extends Model
     public function responses(): HasMany
     {
         return $this->hasMany(SurveyResponse::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('survey_excel_file')
+            ->singleFile();
     }
 
     public function copyForTeam(Team $team)
