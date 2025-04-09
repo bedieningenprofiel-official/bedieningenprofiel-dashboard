@@ -11,14 +11,14 @@
     }" class="flex flex-col">
         <div class="flex flex-row items-center p-2">
             <x-filament::tabs.item alpine-active="activeTab === 'manual'" x-on:click="setActiveTab('manual')">
-                <span>Manual</span>
+                <span>{{ __('surveys/show.filament_tabs.manual') }}</span>
             </x-filament::tabs.item>
             <x-filament::tabs.item alpine-active="activeTab === 'excelImport'" x-on:click="setActiveTab('excelImport')"
                 class="ml-1">
-                <span>Excel Import</span>
+                <span>{{ __('surveys/show.filament_tabs.excel') }}</span>
 
                 <x-slot name="badge">
-                    Experimental
+                    {{ __('surveys/show.filament_tabs.badges.experimental') }}
                 </x-slot>
             </x-filament::tabs.item>
         </div>

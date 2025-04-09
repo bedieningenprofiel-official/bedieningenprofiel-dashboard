@@ -30,5 +30,8 @@ return [
     'surveys' => [
         'created' => 'Enquête is succesvol aangemaakt',
         'already_exists' => 'Een enquête met deze naam bestaat al',
+        'created_question' => 'Vraag successvol aangemaakt voor :survey',
+
+        'excel_imported' => 'Excel document successvol geimporteerd',
     ],
 ];

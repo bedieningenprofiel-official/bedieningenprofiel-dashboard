@@ -30,5 +30,8 @@ return [
     'surveys' => [
         'created' => 'Survey has been created successfully',
         'already_exists' => 'Survey with this name already exists',
+        'created_question' => 'Successfully created a question for :survey',
+
+        'excel_imported' => 'Successfully imported excel file',
     ],
 ];

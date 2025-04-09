@@ -42,8 +42,12 @@ class SurveysController extends Controller
 
     public function handleExcel(Request $request, Survey $survey): RedirectResponse
     {
-        $path = 'excel/' . $request->excel_file;
-        Excel::import(new SurveyQuestionsImport($survey), $path, 'public', ExcelType::XLSX);
+        Excel::import(
+            new SurveyQuestionsImport($survey),
+            $path = 'excel/' . $request->excel_file,
+            'public',
+            ExcelType::XLSX
+        );
 
         $survey->update([
             'excel_file' => $request->excel_file,
@@ -53,7 +57,7 @@ class SurveysController extends Controller
         Storage::delete($path);
 
         Notification::make()
-            ->title('Excel file has been imported')
+            ->title(__('notification.surveys.excel_imported'))
             ->success()
             ->duration(2500)
             ->send();

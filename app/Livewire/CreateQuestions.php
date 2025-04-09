@@ -33,26 +33,26 @@ class CreateQuestions extends Component implements HasForms
         return $form
             ->schema([
                 TextInput::make('left_statement')
-                    ->label('Left statement')
+                    ->label(__('surveys/show.forms.fields.left_statement'))
                     ->required()
                     ->columnSpanFull(),
                 TextInput::make('right_statement')
-                    ->label('Right statement')
+                    ->label(__('surveys/show.forms.fields.right_statement'))
                     ->required()
                     ->columnSpanFull(),
                 Select::make('left_personality_id')
-                    ->label('Left statement personality type')
+                    ->label(__('surveys/show.forms.fields.left_personality_type'))
                     ->required()
                     ->options(PersonalityType::all()->pluck('name', 'id'))
                     ->columnSpan(1),
                 Select::make('right_personality_id')
-                    ->label('Right statement personality type')
+                    ->label(__('surveys/show.forms.fields.right_personality_type'))
                     ->required()
                     ->options(PersonalityType::all()->pluck('name', 'id'))
                     ->columnSpan(1),
                 Actions::make([
                     Action::make('createQuestion')
-                        ->label('Create Question')
+                        ->label(__('surveys/show.forms.fields.buttons.create_question'))
                         ->color(Color::Slate)
                         ->action('createSurveyQuestion')
                 ])
@@ -84,7 +84,7 @@ class CreateQuestions extends Component implements HasForms
         $this->survey->questions()->create($data);
 
         Notification::make()
-            ->title('Successfully created a question for ' . $this->survey->name)
+            ->title(__('notification.surveys.created_question', ['survey' => $this->survey->name]))
             ->success()
             ->duration(2500)
             ->send();

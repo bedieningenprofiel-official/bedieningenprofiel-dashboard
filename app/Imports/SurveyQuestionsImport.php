@@ -42,16 +42,13 @@ class SurveyQuestionsImport implements ToCollection
             $leftPersonalityOutOfDB = PersonalityType::where('name', $leftPersonality)->first();
             $rightPersonalityOutOfDB = PersonalityType::where('name', $rightPersonality)->first();
 
-            if ($latestQuestion = $this->survey->questions->last()) {
-                $orderId = $latestQuestion->id;
-            }
-
+            // ONLY IMPORT WHEN THERE ARE NO QUESTIONS
             $this->survey->questions()->create([
                 'left_statement' => trim($row[0]),
                 'right_statement' => trim($row[4]),
                 'left_personality_id' => $leftPersonalityOutOfDB->id,
                 'right_personality_id' => $rightPersonalityOutOfDB->id,
-                'order' => $orderId ? $orderId + 1 : $row[2],
+                'order' => $row[2],
                 'imported_through_excel' => true,
             ]);
         }
